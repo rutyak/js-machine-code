@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="timer">00:00:00</div>
+    <button onclick="start()">Start</button>
+    <button onclick="stop()">Stop</button>
+    <button onclick="reset()">Reset</button>
+
+    <script>
+      let second = 0;
+      let interval = null;
+
+      const display = document.getElementById("timer");
+
+      function formatTime(sec) {
+        let hr = String(Math.floor(sec / 3600)).padStart(2, "0");
+        let min = String(Math.floor((sec % 3600) / 60)).padStart(2, "0");
+        let second = String(Math.floor(sec % 60)).padStart(2, "0");
+        return `${hr}:${min}:${second}`;
+      }
+
+      function start() {
+        if (interval) return;
+        interval = setInterval(() => {
+          second++;
+          display.innerText = formatTime(second);
+        }, 1000);
+      }
+
+      function stop() {
+        clearInterval(interval);
+        interval = null;
+      }
+
+      function reset() {
+        stop();
+        second = 0;
+        display.innerText = "00:00:00";
+      }
+    </script>
+  </body>
+</html>
