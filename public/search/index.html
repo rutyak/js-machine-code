@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Searching</title>
+  </head>
+  <body>
+    <div>
+      <input id="search" type="text" placeholder="Search..." />
+      <button onclick="handleSearch()">Search</button>
+      <ul id="list">
+        <li id="item">Apple</li>
+        <li id="item">Banana</li>
+        <li id="item">Piapple</li>
+        <li id="item">Gauva</li>
+        <li id="item">Fruit</li>
+        <li id="item">Vegetables</li>
+      </ul>
+    </div>
+    <script>
+      let input = document.getElementById("search");
+      let list = document.querySelectorAll("#item");
+
+      console.log("list: ", list);
+
+      function handleSearch() {
+        let value = input.value.toLowerCase().trim();
+
+        list.forEach((item) => {
+          if (value.trim() === "") {
+            item.style.display = "block";
+            return;
+          }
+          
+          if (item.textContent.toLowerCase().includes(value)) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }
+
+      input.addEventListener("keyup", () => {
+        if (input.value.trim() === "") {
+          handleSearch();
+        }
+      });
+    </script>
+  </body>
+</html>
